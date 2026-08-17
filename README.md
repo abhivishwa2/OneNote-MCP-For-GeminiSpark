@@ -13,83 +13,77 @@ A small integration/utility to connect OneNote with GeminiSpark using the MCP (M
 
 ## Requirements
 
-- Node.js >= 18 (or adjust depending on repo language)
+- Python 3.10+
+- uv package manager (recommended) or pip
+- Microsoft Azure account (free)
 - A Microsoft OneNote account / Microsoft Graph credentials with OneNote permissions
 - (Optional) Credentials or API access for GeminiSpark endpoints
 
 ## Installation
 
-1. Clone the repository
+. Install uv (if you don't have it)
+# macOS/Linux
+curl -LsSf https://astral.sh/uv/install.sh | sh
 
-   git clone https://github.com/abhivishwa2/OneNote-MCP-For-GeminiSpark.git
-   cd OneNote-MCP-For-GeminiSpark
+# or with Homebrew
+brew install uv
+2. Clone and Setup
+git clone https://github.com/yourusername/onenote-mcp-server.git
+cd onenote-mcp-server
 
-2. Install dependencies (example for Node.js projects)
+# Create virtual environment and install dependencies
+uv sync
+3. Azure App Registration
+You need to create an Azure app to access OneNote. Don't worry, it's free and takes 5 minutes:
 
-   npm install
+# Go to Azure Portal (sign in with your Microsoft account)
+Navigate to Azure Active Directory → App registrations → New registration
+Fill out the form:
+Name: "OneNote MCP Server" (or whatever you like)
+Supported account types: "Accounts in any organizational directory and personal Microsoft accounts"
+Redirect URI: Select "Web" and enter: <Redirect URI from Gemini Spark Custom Connected App Dialog Box>
+Click Register
+Copy the Application (client) ID - you'll need this!
+4. Add Permissions
+Still in your Azure app:
 
-Adjust the commands above if this project uses a different runtime or package manager (Python/pip, dotnet, etc.).
+Go to API permissions → Add a permission
+Select Microsoft Graph → Delegated permissions
+Add these permissions:
+Notes.Read - Read OneNote notebooks
+Notes.ReadWrite - Create/modify OneNote content (optional but recommended)
+User.Read - Read user profile
+Offline.access - No need for Client Secret
 
-## Configuration
+Click Grant admin consent (the button at the top)
 
-Create a `.env` file or update the configuration file with the following values (names are examples — match them to the actual implementation):
+5 Go to Manifest -> Update signInAudience to AzureADandPersonalMicrosoftAccount and requestedAccessTokenVersion to 2 and Save.
 
-```
-# Microsoft Graph / OneNote
-GRAPH_CLIENT_ID=your-client-id
-GRAPH_CLIENT_SECRET=your-client-secret
-GRAPH_TENANT_ID=your-tenant-id
-GRAPH_SCOPES=Notes.Read.All
+# Generate Azure Refresh Token (One Time Activity)
 
-# GeminiSpark / MCP endpoint
-GEMINI_ENDPOINT=https://api.geminispark.example/v1/ingest
-GEMINI_API_KEY=your-api-key
+- Update Azure Client ID in refresh_token.py file and run it on cmd.
+- Browser window will open. Login with your Microsoft ID.
+- Post successful login,  Token will be generated in cmd.
+- 
+# Deploy MCP Server on Cloud/Locally
+ - e.g. for Google Cloud run following command. 
 
-# Sync options
-SYNC_MODE=batch     # or "one-off"
-EXPORT_FORMAT=markdown # or json
-```
+- gcloud run deploy onenote-mcp-server --source . --region us-central1 --set-env-vars="AZURE_REFRESH_TOKEN=YOUR_AZURE_REFRESH_TOKEN,AZURE_CLIENT_ID=YOUR_ACTUAL_CLIENT_ID" --allow-unauthenticated****
+- Post Deployment MCP Server URL will be generated.
 
-If your project uses a different config mechanism, add instructions here for that mechanism (config.yaml, credentials file, secret manager, etc.).
+# Setup Custom Connected App in Gemini Spark
+
+ - Click on Connected Apps
+ - Fill MCP Server URL
+ - In Advance Settings -> Fill Azure Client ID
+ - Click on Copy Redirect URI and Go to Azure Portal --> Azure Client App --> Authentication --> Redirect URIs  --> Add URI --> Web --> Paste the Copied Link --> Remove any other Redirect URIs
+ -  Click next and Follow screens.
+ -  Onenote Mcp server will be created in Connected App Screen
 
 ## Usage
 
-Examples below are illustrative. Replace `node ./bin/sync.js` with the actual entrypoint for this repository.
+ - Open Gemini Spark -> Task --> List my OneNote notebook using onenote-mcp-server
 
-- Run a one-off export
-
-  npm run export -- --notebook "My Notebook" --format markdown
-
-- Run scheduled/batch sync
-
-  npm run sync
-
-- Send exported content to GeminiSpark
-
-  npm run push -- --file ./exports/notes.json
-
-## Project structure (suggested)
-
-- src/           # Source code
-- bin/           # CLI entrypoints or scripts
-- examples/      # Example configs and request payloads
-- tests/         # Unit and integration tests
-- docs/          # Additional documentation
-
-Update this section to reflect the actual layout of the repository.
-
-## Development
-
-- Run tests:
-
-  npm test
-
-- Lint and format:
-
-  npm run lint
-  npm run format
-
-- Add a new connector or transformer by creating a new module under `src/connectors` and register it in the main sync flow.
 
 ## Contributing
 
@@ -112,4 +106,4 @@ Specify the repository license here (e.g., MIT, Apache-2.0). If you haven't chos
 
 ---
 
-If you'd like, I can tailor this README to the actual implementation details in the repo (language, commands, code examples). Tell me to inspect the repository and I'll update the Usage and Configuration sections with live commands and examples.
+
