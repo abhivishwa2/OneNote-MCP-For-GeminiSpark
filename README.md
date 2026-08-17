@@ -77,7 +77,10 @@ Still in your Azure app:
   
 ### 6. Deploy MCP Server on Cloud/Locally
 - e.g. for Google Cloud Deployment run following command. 
-- 'gcloud run deploy onenote-mcp-server --source . --region us-central1 --set-env-vars="AZURE_REFRESH_TOKEN=YOUR_AZURE_REFRESH_TOKEN,AZURE_CLIENT_ID=YOUR_ACTUAL_CLIENT_ID" --allow-unauthenticated****`
+  ```
+  gcloud run deploy onenote-mcp-server --source . --region us-central1 --set-env-vars="AZURE_REFRESH_TOKEN=YOUR_AZURE_REFRESH_TOKEN,AZURE_CLIENT_ID=YOUR_ACTUAL_CLIENT_ID" --allow-unauthenticated****
+
+  ```
 - Post Deployment MCP Server URL will be generated.
 
 ### 7.  Setup Custom Connected App in Gemini Spark
