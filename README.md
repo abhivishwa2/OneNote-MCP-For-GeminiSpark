@@ -21,22 +21,22 @@ A small integration/utility to connect OneNote with GeminiSpark using the MCP (M
 ## Installation
 
  - Install uv (if you don't have it)
-# macOS/Linux
+### macOS/Linux
  - curl -LsSf https://astral.sh/uv/install.sh | sh
 
-# or with Homebrew
+### or with Homebrew
 - brew install uv
   
-# Clone and Setup
+### Clone and Setup
 - git clone https://github.com/abhivishwa2/onenote-mcp-server.git
 - cd onenote-mcp-server
 
-# Create virtual environment and install dependencies
+### Create virtual environment and install dependencies
 - uv sync
-# Azure App Registration
+### Azure App Registration
 - You need to create an Azure app to access OneNote. Don't worry, it's free and takes 5 minutes:
 
-# Go to Azure Portal (sign in with your Microsoft account)
+### Go to Azure Portal (sign in with your Microsoft account)
 - Navigate to Azure Active Directory → App registrations → New registration
 - Fill out the form:
 - Name: "OneNote MCP Server" (or whatever you like)
@@ -44,11 +44,11 @@ A small integration/utility to connect OneNote with GeminiSpark using the MCP (M
 - Redirect URI: Select "Web" and enter: <Redirect URI from Gemini Spark Custom Connected App Dialog Box>
 - Click Register
 - Copy the Application (client) ID - you'll need this!
-# Add Permissions
+### Add Permissions
 - Still in your Azure app:
 - Go to API permissions → Add a permission
 - Select Microsoft Graph → Delegated permissions
-# Add these permissions:
+### Add these permissions:
 - Notes.Read - Read OneNote notebooks
 - Notes.ReadWrite - Create/modify OneNote content (optional but recommended)
 - User.Read - Read user profile
@@ -56,21 +56,21 @@ A small integration/utility to connect OneNote with GeminiSpark using the MCP (M
 - Click Grant admin consent (the button at the top)
 - Go to Manifest -> Update signInAudience to AzureADandPersonalMicrosoftAccount and requestedAccessTokenVersion to 2 and Save.
 
-# Generate Azure Refresh Token (One Time Activity)
+### Generate Azure Refresh Token (One Time Activity)
 
 - Update Azure Client ID in refresh_token.py file and run it on cmd.
 - Browser window will open. Login with your Microsoft ID.
 - Post successful login,  Token will be generated in cmd.
   
-# Deploy MCP Server on Cloud/Locally
+### Deploy MCP Server on Cloud/Locally
 - e.g. for Google Cloud Deployment run following command. 
 - gcloud run deploy onenote-mcp-server --source . --region us-central1 --set-env-vars="AZURE_REFRESH_TOKEN=YOUR_AZURE_REFRESH_TOKEN,AZURE_CLIENT_ID=YOUR_ACTUAL_CLIENT_ID" --allow-unauthenticated****
 - Post Deployment MCP Server URL will be generated.
 
-# Setup Custom Connected App in Gemini Spark
+### Setup Custom Connected App in Gemini Spark
 
  - Click on Connected Apps
- - Fill <MCP Server URL>/sse  (Do not forget to add /sse at the of the URL)
+ - Fill MCP Server URL/sse  (Do not forget to add /sse at the of the URL)
  - In Advance Settings -> Fill Azure Client ID
  - Click on Copy Redirect URI and Go to Azure Portal --> Azure Client App --> Authentication --> Redirect URIs  --> Add URI --> Web --> Paste the Copied Link --> Remove any other Redirect URIs
  - On the Connected App Dialog box -> Click next and Follow screens.
