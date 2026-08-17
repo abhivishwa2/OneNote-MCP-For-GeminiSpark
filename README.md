@@ -175,7 +175,7 @@ MIT License - see LICENSE file for details.
 
 - Built with [FastMCP](https://github.com/jlowin/fastmcp) framework
 - Uses Microsoft Graph API for OneNote access
-- Inspired by the amazing work of purpleslurple (https://github.com/purpleslurple/onenote-mcp-server)
+- Inspired by the amazing work of [purpleslurple](https://github.com/purpleslurple/onenote-mcp-server)
 
 ## ⚠️ Important Notes
 
