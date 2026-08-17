@@ -70,10 +70,10 @@ A small integration/utility to connect OneNote with GeminiSpark using the MCP (M
 # Setup Custom Connected App in Gemini Spark
 
  - Click on Connected Apps
- - Fill MCP Server URL
+ - Fill <MCP Server URL>/sse  (Do not forget to add /sse at the of the URL)
  - In Advance Settings -> Fill Azure Client ID
  - Click on Copy Redirect URI and Go to Azure Portal --> Azure Client App --> Authentication --> Redirect URIs  --> Add URI --> Web --> Paste the Copied Link --> Remove any other Redirect URIs
- - Click next and Follow screens.
+ - On the Connected App Dialog box -> Click next and Follow screens.
  - Onenote Mcp server will be created in Connected App Screen
 
 ## Usage
@@ -93,7 +93,7 @@ Guidelines:
 
 ## License
 
-- Specify the repository license here (e.g., MIT, Apache-2.0). If you haven't chosen a license yet, consider adding one.
+ MIT
 
 ## Acknowledgements
 
