@@ -65,7 +65,7 @@ Still in your Azure app:
    - `Notes.Read` - Read OneNote notebooks
    - `Notes.ReadWrite` - Create/modify OneNote content (optional but recommended)
    - `User.Read` - Read user profile
-   - `Offline.access` - No need for Client Secret
+   - `Offline.access` - Permit Refresh Token Access
 4. Click Grant admin consent (the button at the top)
 5. Go to Manifest -> Update signInAudience to AzureADandPersonalMicrosoftAccount and requestedAccessTokenVersion to 2 and Save.
 
@@ -78,7 +78,9 @@ Still in your Azure app:
 ### 6. Deploy MCP Server on Cloud/Locally
 - e.g. for Google Cloud Deployment run following command. 
   ```
-  gcloud run deploy onenote-mcp-server --source . --region us-central1 --set-env-vars="AZURE_REFRESH_TOKEN=YOUR_AZURE_REFRESH_TOKEN,AZURE_CLIENT_ID=YOUR_ACTUAL_CLIENT_ID" --allow-unauthenticated****
+  gcloud run deploy onenote-mcp-server --source . --region us-central1
+  --set-env-vars="AZURE_REFRESH_TOKEN=YOUR_AZURE_REFRESH_TOKEN,AZURE_CLIENT_ID=YOUR_ACTUAL_CLIENT_ID"
+  --allow-unauthenticated
 
   ```
 - Post Deployment MCP Server URL will be generated.
@@ -131,7 +133,8 @@ Read the content of my "Project Plan" page
 ```
 onenote-mcp-server/
 ├── onenote_mcp_server.py      # Main server implementation
-├── pyproject.toml             # Dependencies and metadata  
+├── pyproject.toml             # Dependencies and metadata
+├── refresh_token.py           # Generate Refresh Token
 ├── README.md                  # This file
 ├── LICENSE                    # MIT License
 └── .gitignore                 # Git ignore rules
