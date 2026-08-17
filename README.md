@@ -54,7 +54,6 @@ You need to create an Azure app to access OneNote. **Don't worry, it's free and 
 3. Fill out the form:
    - **Name**: "OneNote MCP Server" (or whatever you like)
    - **Supported account types**: "Accounts in any organizational directory and personal Microsoft accounts"
-   - **Redirect URI**: Select "Public client/native" and enter: `https://login.microsoftonline.com/common/oauth2/nativ`
 4. Click **Register**
 5. Copy the **Application (client) ID** - you'll need this!
 
@@ -67,8 +66,8 @@ Still in your Azure app:
    - `Notes.ReadWrite` - Create/modify OneNote content (optional but recommended)
    - `User.Read` - Read user profile
    - `Offline.access` - No need for Client Secret
-4 Click Grant admin consent (the button at the top)
-5 Go to Manifest -> Update signInAudience to AzureADandPersonalMicrosoftAccount and requestedAccessTokenVersion to 2 and Save.
+4. Click Grant admin consent (the button at the top)
+5. Go to Manifest -> Update signInAudience to AzureADandPersonalMicrosoftAccount and requestedAccessTokenVersion to 2 and Save.
 
 ### 5. Generate Azure Refresh Token (One Time Activity)
 
