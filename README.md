@@ -21,43 +21,41 @@ A small integration/utility to connect OneNote with GeminiSpark using the MCP (M
 
 ## Installation
 
-. Install uv (if you don't have it)
+ - Install uv (if you don't have it)
 # macOS/Linux
-curl -LsSf https://astral.sh/uv/install.sh | sh
+ - curl -LsSf https://astral.sh/uv/install.sh | sh
 
 # or with Homebrew
-brew install uv
-2. Clone and Setup
-git clone https://github.com/yourusername/onenote-mcp-server.git
-cd onenote-mcp-server
+- brew install uv
+  
+# Clone and Setup
+- git clone https://github.com/yourusername/onenote-mcp-server.git
+- cd onenote-mcp-server
 
 # Create virtual environment and install dependencies
-uv sync
-3. Azure App Registration
-You need to create an Azure app to access OneNote. Don't worry, it's free and takes 5 minutes:
+- uv sync
+# Azure App Registration
+- You need to create an Azure app to access OneNote. Don't worry, it's free and takes 5 minutes:
 
 # Go to Azure Portal (sign in with your Microsoft account)
-Navigate to Azure Active Directory → App registrations → New registration
-Fill out the form:
-Name: "OneNote MCP Server" (or whatever you like)
-Supported account types: "Accounts in any organizational directory and personal Microsoft accounts"
-Redirect URI: Select "Web" and enter: <Redirect URI from Gemini Spark Custom Connected App Dialog Box>
-Click Register
-Copy the Application (client) ID - you'll need this!
-4. Add Permissions
-Still in your Azure app:
-
-Go to API permissions → Add a permission
-Select Microsoft Graph → Delegated permissions
-Add these permissions:
-Notes.Read - Read OneNote notebooks
-Notes.ReadWrite - Create/modify OneNote content (optional but recommended)
-User.Read - Read user profile
-Offline.access - No need for Client Secret
-
-Click Grant admin consent (the button at the top)
-
-5 Go to Manifest -> Update signInAudience to AzureADandPersonalMicrosoftAccount and requestedAccessTokenVersion to 2 and Save.
+- Navigate to Azure Active Directory → App registrations → New registration
+- Fill out the form:
+- Name: "OneNote MCP Server" (or whatever you like)
+- Supported account types: "Accounts in any organizational directory and personal Microsoft accounts"
+- Redirect URI: Select "Web" and enter: <Redirect URI from Gemini Spark Custom Connected App Dialog Box>
+- Click Register
+- Copy the Application (client) ID - you'll need this!
+# Add Permissions
+- Still in your Azure app:
+- Go to API permissions → Add a permission
+- Select Microsoft Graph → Delegated permissions
+# Add these permissions:
+- Notes.Read - Read OneNote notebooks
+- Notes.ReadWrite - Create/modify OneNote content (optional but recommended)
+- User.Read - Read user profile
+- Offline.access - No need for Client Secret
+- Click Grant admin consent (the button at the top)
+- Go to Manifest -> Update signInAudience to AzureADandPersonalMicrosoftAccount and requestedAccessTokenVersion to 2 and Save.
 
 # Generate Azure Refresh Token (One Time Activity)
 
@@ -67,7 +65,6 @@ Click Grant admin consent (the button at the top)
 - 
 # Deploy MCP Server on Cloud/Locally
  - e.g. for Google Cloud run following command. 
-
 - gcloud run deploy onenote-mcp-server --source . --region us-central1 --set-env-vars="AZURE_REFRESH_TOKEN=YOUR_AZURE_REFRESH_TOKEN,AZURE_CLIENT_ID=YOUR_ACTUAL_CLIENT_ID" --allow-unauthenticated****
 - Post Deployment MCP Server URL will be generated.
 
@@ -77,17 +74,17 @@ Click Grant admin consent (the button at the top)
  - Fill MCP Server URL
  - In Advance Settings -> Fill Azure Client ID
  - Click on Copy Redirect URI and Go to Azure Portal --> Azure Client App --> Authentication --> Redirect URIs  --> Add URI --> Web --> Paste the Copied Link --> Remove any other Redirect URIs
- -  Click next and Follow screens.
- -  Onenote Mcp server will be created in Connected App Screen
+ - Click next and Follow screens.
+ - Onenote Mcp server will be created in Connected App Screen
 
 ## Usage
 
- - Open Gemini Spark -> Task --> List my OneNote notebook using onenote-mcp-server
+- Open Gemini Spark -> Task --> List my OneNote notebook using onenote-mcp-server
 
 
 ## Contributing
 
-Contributions are welcome. Please open an issue first to discuss larger changes. For small fixes, submit a pull request with descriptive commits and tests.
+- Contributions are welcome. Please open an issue first to discuss larger changes. For small fixes, submit a pull request with descriptive commits and tests.
 
 Guidelines:
 
@@ -97,7 +94,7 @@ Guidelines:
 
 ## License
 
-Specify the repository license here (e.g., MIT, Apache-2.0). If you haven't chosen a license yet, consider adding one.
+- Specify the repository license here (e.g., MIT, Apache-2.0). If you haven't chosen a license yet, consider adding one.
 
 ## Acknowledgements
 
