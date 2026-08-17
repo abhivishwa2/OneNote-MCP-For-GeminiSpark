@@ -2,7 +2,6 @@
 
 A small integration/utility to connect OneNote with GeminiSpark using the MCP (Message/Media/Content Provider) pattern. This repository contains code, configuration, and examples to synchronize OneNote content with GeminiSpark workflows, export OneNote notes into GeminiSpark-ready formats, and demonstrate common automation scenarios.
 
-> Note: This README is intentionally generic — update the Usage and Configuration sections with repository-specific commands, environment variables, and examples after implementing the concrete integration details.
 
 ## Features
 
@@ -29,7 +28,7 @@ A small integration/utility to connect OneNote with GeminiSpark using the MCP (M
 - brew install uv
   
 # Clone and Setup
-- git clone https://github.com/yourusername/onenote-mcp-server.git
+- git clone https://github.com/abhivishwa2/onenote-mcp-server.git
 - cd onenote-mcp-server
 
 # Create virtual environment and install dependencies
@@ -62,9 +61,9 @@ A small integration/utility to connect OneNote with GeminiSpark using the MCP (M
 - Update Azure Client ID in refresh_token.py file and run it on cmd.
 - Browser window will open. Login with your Microsoft ID.
 - Post successful login,  Token will be generated in cmd.
-- 
+  
 # Deploy MCP Server on Cloud/Locally
- - e.g. for Google Cloud run following command. 
+- e.g. for Google Cloud Deployment run following command. 
 - gcloud run deploy onenote-mcp-server --source . --region us-central1 --set-env-vars="AZURE_REFRESH_TOKEN=YOUR_AZURE_REFRESH_TOKEN,AZURE_CLIENT_ID=YOUR_ACTUAL_CLIENT_ID" --allow-unauthenticated****
 - Post Deployment MCP Server URL will be generated.
 
