@@ -2,7 +2,7 @@ import requests
 import time
 
 # 1. Insert your Azure Client ID here
-CLIENT_ID = "f09fabe8-05ee-4304-8fde-1d007c26a5dd"
+CLIENT_ID = "Azure Client ID"
 TENANT_ID = "common"
 
 # Endpoints
